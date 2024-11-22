@@ -16,22 +16,15 @@ if [ ! -d $OUTDIR ]; then  # check again
 fi
 
 echo $OUTDIR
-rm -rf "$OUTDIR/prepare"
-rm -rf "$OUTDIR/unpack"
-mkdir "$OUTDIR/prepare"
-mkdir "$OUTDIR/unpack"
-contents_workspace="$OUTDIR/unpack"
-preparation_workspace="$OUTDIR/prepare"
+rm -rf "$OUTDIR/*"
 contents_sign_key="./key.pub"
 device_dec_key="./key.private"
-entry_rootfs=root
-entry_script=enter.sh
-preparation_sign=$(mktemp)
-preparation_archive=$(mktemp)
-contents_sign=$(mktemp)
-contents_key=$(mktemp)
-contents_iv=$(mktemp)
-contents_archive=$(mktemp)
+preparation_sign="$OUTDIR/preparation_archive.sig"
+preparation_archive="$OUTDIR/preparation_archive.zip"
+contents_sign="$OUTDIR/contents_sign.sig"
+contents_key="$OUTDIR/contents_key.key"
+contents_iv="$OUTDIR/contents_iv.iv"
+contents_archive="$OUTDIR/contents_archive.zip"
 contents=$package.contents
 
 echo_int32 ()
@@ -74,11 +67,6 @@ openssl dgst -sha256 \
   -signature $preparation_sign < $preparation_archive
 echo "###Done!"
 
-echo "####Unpack contents: preparation..."
-unzip -qd $preparation_workspace $preparation_archive
-rm -f $preparation_archive
-echo "###Done!"
-
 echo "###Extract files..."
 set -- $(echo_int32 $package 0 $header_size)
 # sign/contents
@@ -110,11 +98,6 @@ openssl enc -d -aes-256-cbc \
 rm -f $contents
 echo "###Done!"
 
-echo "###Unpack entry files..."
-unzip -qd $contents_workspace $contents_archive $entry_rootfs/*
-unzip -qd $contents_workspace/$entry_rootfs $contents_archive $entry_script
-mv $contents_archive $contents_workspace/$entry_rootfs/$contents_archive
-mv $OUTDIR/unpack/root/tmp/tmp.* "$OUTDIR"
 echo "###All Done!"
 
 
