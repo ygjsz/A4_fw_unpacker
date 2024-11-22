@@ -9,6 +9,14 @@ The public and private keys can be dumped from the device's rawdata partation.
 The structure of the update package is different from the first Gen of the Fujitsu Quaderno (Sony DPT)
 
 # Firmware Download Links:
+http://www.fmworld.net/download/digital-paper/sw/FwUpdater_gen2_2.1.00.20271FP.pkg
+
+http://www.fmworld.net/download/digital-paper/sw/FwUpdater_gen2_1.1.02.15120FP.pkg
+
+http://www.fmworld.net/download/digital-paper/sw/FwUpdater_gen2_1.1.02.12130FP.pkg
+
+http://www.fmworld.net/download/digital-paper/sw/FwUpdater_gen2_1.1.01.04100FP.pkg
+
 http://www.fmworld.net/download/digital-paper/sw/FwUpdater_gen2_1.1.00.26010FP.pkg
 
 http://www.fmworld.net/download/digital-paper/sw/FwUpdater_gen2_1.1.00.24160FP.pkg
